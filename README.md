@@ -1,3 +1,16 @@
+- [Racoon Media Server](#racoon-media-server)
+  * [Концепт](#)
+  * [Features](#features)
+  * [Технологический стек](#-)
+  * [Архитектура](#-1)
+    + [Device](#device)
+      - [Микросервисы](#-2)
+      - [Скрипты и конфиги](#--1)
+    + [Remote Server](#remote-server)
+      - [Причины появления **Remote Server**](#-remote-server)
+      - [Микросервисы](#-3)
+      - [Скрипты и конфиги](#--2)
+      
 # Racoon Media Server
 
 Architecture overview &amp; Documentation
@@ -34,6 +47,15 @@ _Не все еще перенесено из приватных репозит�
 * Рестриминг видео (**в публичном репозитории отсутствует**);
 * Сбор тревожных событий с камер и нотификация (**в публичном репозитории отсутствует**);
 * Ряд встроенных 3rd-party сервисов ([Nextcloud](https://nextcloud.com/), [Serviio](https://www.serviio.org/download), [Gitea](https://gitea.io/en-us/)).
+
+## Технологический стек
+
+* [Go](https://go.dev/);
+* [Go-Micro](https://micro.dev/);
+* [MongoDB](https://www.mongodb.com/);
+* [PostgreSQL](https://www.postgresql.org/);
+* [Gin](https://gin-gonic.com/);
+* [Gorm](https://gorm.io/).
 
 ## Архитектура
 
@@ -78,13 +100,3 @@ _Не все еще перенесено из приватных репозит�
 #### Скрипты и конфиги
 
 Запускается из под docker-compose. Вынесены в отдельный [репозиторий](https://github.com/RacoonMediaServer/rms-remote).
-
-
-## Технологический стек
-
-* [Go](https://go.dev/);
-* [Go-Micro](https://micro.dev/);
-* [MongoDB](https://www.mongodb.com/);
-* [PostgreSQL](https://www.postgresql.org/);
-* [Gin](https://gin-gonic.com/);
-* [Gorm](https://gorm.io/).
