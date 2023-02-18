@@ -1,16 +1,17 @@
-- [Racoon Media Server](#racoon-media-server)
-  * [Концепт](#)
+* [Racoon Media Server](#racoon-media-server)
+  * [Концепт](#концепт)
   * [Features](#features)
-  * [Технологический стек](#-)
-  * [Архитектура](#-1)
-    + [Device](#device)
-      - [Микросервисы](#-2)
-      - [Скрипты и конфиги](#--1)
-    + [Remote Server](#remote-server)
-      - [Причины появления **Remote Server**](#-remote-server)
-      - [Микросервисы](#-3)
-      - [Скрипты и конфиги](#--2)
-      
+  * [Технологический стек](#технологический-стек)
+  * [Архитектура](#архитектура)
+    * [Device](#device)
+      * [Микросервисы](#микросервисы)
+      * [Скрипты и конфиги](#скрипты-и-конфиги)
+    * [Remote Server](#remote-server)
+      * [Причины появления **Remote Server**](#причины-появления-remote-server)
+      * [Микросервисы](#микросервисы-1)
+      * [Скрипты и конфиги](#скрипты-и-конфиги-1)
+
+
 # Racoon Media Server
 
 Architecture overview &amp; Documentation
