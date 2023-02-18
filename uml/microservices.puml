@@ -1,0 +1,101 @@
+@startuml Microservices of RacoonMediaServer
+
+skinparam interface {
+    backgroundColor RosyBrown
+    borderColor orange
+}
+
+skinparam component {
+    FontSize 14
+    BackgroundColor<<Apache>> Red
+    BorderColor<<Apache>> #FF6655
+    FontName Droid Sans
+    BorderColor black
+    BackgroundColor #FFD919
+    ArrowFontName Impact
+    ArrowColor gray
+}
+
+skinparam database {
+    FontSize 14
+    BackgroundColor<<Apache>> Red
+    BorderColor<<Apache>> #FF6655
+    FontName Droid Sans
+    BorderColor black
+    BackgroundColor orange
+    ArrowFontName Impact
+    ArrowColor #FF6655
+}
+
+cloud {
+    [Internet]
+}
+
+package "Device" {
+    [rms-library]
+    [rms-bot-client]
+    [rms-torrent]
+    [rms-web]
+    [rms-notifier]
+    [rms-transcoder]
+    database "MongoDB" {
+    }
+    database "Disk" {
+    }
+    database "PostgresSQL" as LocalDB {
+    }
+
+    [rms-library] --> MongoDB : Media Collection
+    [rms-library] --> [rms-torrent] : Commands for download
+
+    [rms-torrent] --> Disk : Store Media 
+    [rms-torrent] --> [Internet] : Download Torrents
+    [rms-torrent] --> [rms-notifier] : Notifications
+
+    [rms-transcoder] --> Disk : Reencode
+    [rms-transcoder] --> [rms-notifier] : Notifications
+
+    [rms-web] --> [rms-library] : Collection Management
+    [rms-web] --> [rms-torrent] : Downloads Management
+    [rms-web] --> LocalDB : Settings
+
+    [rms-bot-client] --> [rms-library] : Searching Media
+
+    [rms-notifier] --> [rms-bot-client] : Notifications
+}
+
+package "Remote Server" {
+    HTTP --> [rms-media-discovery] : Searching Media
+    WebSocket --> [rms-bot-server]
+    HTTP --> [rms-users] : User Management
+    database "PostgresSQL" {
+        [Users]
+        [Linkages]
+        [External Accounts]
+    }
+    [rms-users] --> [Users]
+
+    [rms-bot-server] --> [Linkages]
+    
+    [rms-media-discovery] --> [rms-users] : Verify Access
+    [rms-media-discovery] --> [External Accounts] : Tokens Management
+
+    [rms-bot-server] --> [rms-users] : Verify Access
+}
+
+cloud {
+    [Telegram]
+}
+
+
+
+[rms-media-discovery] --> [Internet] : Searching Media
+[rms-bot-server] --> Telegram
+[rms-bot-client] --> WebSocket
+
+
+[rms-library] --> HTTP : Searching Media
+
+
+
+@enduml
